@@ -3,4 +3,4 @@
 <%= button_to "Add a new moment", new_moment_path, method: :get %>
 <%= button_to "Login with Google", login_path, method: :get %>
 <%= button_to "Logout", logout_path, method: :get %>
-Current User: <%= current_user %>
+Current User: <%= current_user&.name %>
