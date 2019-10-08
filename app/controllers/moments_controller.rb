@@ -1,4 +1,7 @@
 class MomentsController < ApplicationController
+
+  before_action :authenticate, only: %w[new create]
+
   def index
     @moments = Moment.all
   end
@@ -21,5 +24,9 @@ class MomentsController < ApplicationController
 
   def moment_params
     params.require(:moment).permit(:prompt)
+  end
+
+  def authenticate
+    redirect_to root_path unless current_user.present?
   end
 end
