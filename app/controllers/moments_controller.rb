@@ -7,12 +7,14 @@ class MomentsController < ApplicationController
   end
 
   def new
-    @moment = Moment.new(prompt: "Tell me about a time ...")
+    @moment = Moment.new(prompt: "Tell me about a time ...", user: current_user)
   end
 
   def create
     @moment= Moment.new(moment_params)
-    if @moment.save
+    @moment.user = current_user
+
+    if @moment.save!
       flash[:notice] = "The Moment was created."
       redirect_to moments_path
     else
